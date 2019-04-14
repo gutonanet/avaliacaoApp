@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.lemes.augusto.avaliacao.entity.ProvaDTO;
 import com.lemes.augusto.avaliacao.service.ExecuteRestPostService;
+import com.lemes.augusto.avaliacao.service.ProvaResponseService;
 import com.lemes.augusto.avaliacao.view.SpinnerFactory;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinnerMaterias;
     String urlTipoProva="http://192.168.0.10:8080/avaliacao/api/tiposProva";
     String urlMaterias="http://192.168.0.10:8080/avaliacao/api/materias";
-    String urlSalvar="http://192.168.0.10:8080/avaliacao/api/listarQuestoes";
+    String urlSalvar="http://192.168.0.10:8080/avaliacao/api/findProva";
     ArrayList<String> listaTipoProva;
     ArrayList<String> listaMateria;
     Button button;
@@ -52,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 param.put("tipoProva", spinner.getSelectedItem().toString());
                 param.put("frase", frase.getText().toString());
                 param.put("materia",spinnerMaterias.getSelectedItem().toString());
-                ExecuteRestPostService exec = new ExecuteRestPostService(param,urlSalvar, MainActivity.this);
+                ProvaDTO provaDTO = new ProvaDTO();
+                ProvaResponseService exec = new ProvaResponseService(param,urlSalvar, MainActivity.this,provaDTO);
                 exec.callvolly();
 
             }

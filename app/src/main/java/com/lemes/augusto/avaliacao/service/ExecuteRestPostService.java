@@ -1,7 +1,6 @@
 package com.lemes.augusto.avaliacao.service;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,17 +11,22 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
-public class ExecuteRestPostService {
+public abstract class ExecuteRestPostService<T> {
 
     private Map<String, String> params;
     private String url;
     private Context act;
+    protected T dto;
 
+    private ExecuteRestPostService(){
 
-    public ExecuteRestPostService(Map<String, String> params,String url, Context act){
+    }
+
+    public ExecuteRestPostService(Map<String, String> params,String url, Context act, T dto){
         this.params = params;
         this.url = url;
         this.act = act;
+        this.dto = dto;
     }
 
     public void callvolly(){
@@ -30,8 +34,10 @@ public class ExecuteRestPostService {
         StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //This code is executed if the server responds, whether or not the response contains data.
-                //The String 'response' contains the server's response.
+
+                response(response);
+
+
             }
         }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
@@ -45,7 +51,9 @@ public class ExecuteRestPostService {
         };
 
 
-        MyRequestQueue.add(MyStringRequest);
+                MyRequestQueue.add(MyStringRequest);
     }
+
+    public abstract void response(String response);
 
 }
