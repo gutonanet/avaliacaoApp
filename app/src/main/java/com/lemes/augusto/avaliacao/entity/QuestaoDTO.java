@@ -13,18 +13,7 @@ public class QuestaoDTO {
 
     private Integer tipoQuestao;
 
-    private String resposta;
-
-    private List<RespostaDTO> respostas = new ArrayList<>();
-
-    public String getRespostaShort() {
-        if(resposta!= null) {
-            if(resposta.length() > 100) {
-                return resposta.substring(0, 100)+"...";
-            }
-        }
-        return resposta;
-    }
+    private Long idProva;
 
     public String getQuestaoShort() {
         if(questao!= null) {
@@ -59,22 +48,6 @@ public class QuestaoDTO {
         this.tipoQuestao = tipoQuestao;
     }
 
-    public String getResposta() {
-        return resposta;
-    }
-
-    public void setResposta(String resposta) {
-        this.resposta = resposta;
-    }
-
-    public List<RespostaDTO> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<RespostaDTO> respostas) {
-        this.respostas = respostas;
-    }
-
     public String getHabilidade() {
         return habilidade;
     }
@@ -83,4 +56,16 @@ public class QuestaoDTO {
         this.habilidade = habilidade;
     }
 
+    public Long getIdProva() {
+        return idProva;
+    }
+
+    public void setIdProva(Long idProva) {
+        this.idProva = idProva;
+    }
+
+    @Override
+    public String toString() {
+        return getQuestaoShort();
+    }
 }

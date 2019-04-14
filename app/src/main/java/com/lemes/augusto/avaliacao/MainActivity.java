@@ -2,6 +2,7 @@ package com.lemes.augusto.avaliacao;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.lemes.augusto.avaliacao.entity.AcaoEnum;
+import com.lemes.augusto.avaliacao.entity.MateriaDTO;
 import com.lemes.augusto.avaliacao.entity.ProvaDTO;
 import com.lemes.augusto.avaliacao.service.ExecuteRestPostService;
 import com.lemes.augusto.avaliacao.service.ProvaResponseService;
@@ -54,13 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 param.put("tipoProva", spinner.getSelectedItem().toString());
                 param.put("frase", frase.getText().toString());
                 param.put("materia",spinnerMaterias.getSelectedItem().toString());
-                ProvaDTO provaDTO = new ProvaDTO();
-                ProvaResponseService exec = new ProvaResponseService(param,urlSalvar, MainActivity.this,provaDTO);
+                ProvaDTO prova = new ProvaDTO();
+                MateriaDTO material = new MateriaDTO();
+                prova.setMateria(material);
+                ProvaResponseService exec = new ProvaResponseService(param,urlSalvar, getThis(), AcaoEnum.SALVAR, prova);
                 exec.callvolly();
+
 
             }
         });
 
+    }
+
+    public Context getThis(){
+        return this;
     }
 
 

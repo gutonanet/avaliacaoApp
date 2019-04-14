@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.lemes.augusto.avaliacao.entity.AcaoEnum;
 
 import java.util.Map;
 
@@ -15,18 +16,20 @@ public abstract class ExecuteRestPostService<T> {
 
     private Map<String, String> params;
     private String url;
-    private Context act;
+    protected Context act;
     protected T dto;
+    protected AcaoEnum acao;
 
     private ExecuteRestPostService(){
 
     }
 
-    public ExecuteRestPostService(Map<String, String> params,String url, Context act, T dto){
+    public ExecuteRestPostService(Map<String, String> params,String url, Context act, AcaoEnum acao, T dto){
         this.params = params;
         this.url = url;
         this.act = act;
         this.dto = dto;
+        this.acao = acao;
     }
 
     public void callvolly(){
