@@ -8,11 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.lemes.augusto.avaliacao.ListarQuestoesActivity;
+import com.lemes.augusto.avaliacao.ListarRespostasActivity;
 import com.lemes.augusto.avaliacao.QuestaoEditActivity;
+import com.lemes.augusto.avaliacao.RespostaEditActivity;
 import com.lemes.augusto.avaliacao.entity.AcaoEnum;
-import com.lemes.augusto.avaliacao.entity.MateriaDTO;
-import com.lemes.augusto.avaliacao.entity.ProvaDTO;
 import com.lemes.augusto.avaliacao.entity.QuestaoDTO;
+import com.lemes.augusto.avaliacao.entity.RespostaDTO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,46 +22,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
+public class RespostaRestPostService extends ExecuteRestPostService<RespostaDTO>  {
 
-    private List<QuestaoDTO> lista;
+    private List<RespostaDTO> lista;
 
     private ListView listView;
 
-    public QuestaoRestPostService(Map<String, String> params, String url, Context act, AcaoEnum acao, QuestaoDTO dto) {
+    public RespostaRestPostService(Map<String, String> params, String url, Context act, AcaoEnum acao, RespostaDTO dto) {
         super(params, url, act,acao, dto);
     }
 
 
     @Override
     public void response(String response) {
-        if(acao.equals(AcaoEnum.LISTAR)){
-            listarQuestoes(response);
+        if (acao.equals(AcaoEnum.LISTAR)) {
+            listarRespostas(response);
         }
 
-        if(acao.equals(AcaoEnum.SALVAR)){
+        if (acao.equals(AcaoEnum.SALVAR)) {
             salvar(response);
         }
 
     }
 
-    private void listarQuestoes(String response){
+    private void listarRespostas(String response){
         lista = new ArrayList<>();
         try {
 
             JSONArray array = new JSONArray(response);
             for(int i = 0; i < array.length();i++){
                 JSONObject obj = array.getJSONObject(i);
-                QuestaoDTO q = new QuestaoDTO();
-                q.setId(obj.getLong("idQuestao"));
-                q.setHabilidade(obj.getString("habilidade"));
-                q.setQuestao(obj.getString("questao"));
-                q.setIdProva(obj.getLong("idProva"));
-                lista.add(q);
+                RespostaDTO r = new RespostaDTO();
+                r.setId(obj.getLong("idResposta"));
+                r.setResposta(obj.getString("resposta"));
+                r.setIdQuestao(obj.getLong("idResposta"));
+                lista.add(r);
             }
 
 
-            ArrayAdapter<QuestaoDTO> adapter = new ArrayAdapter<QuestaoDTO>(act,
+            ArrayAdapter<RespostaDTO> adapter = new ArrayAdapter<RespostaDTO>(act,
                     android.R.layout.simple_list_item_1,lista);
 
             listView.setAdapter(adapter);
@@ -69,17 +69,16 @@ public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
                     new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            QuestaoDTO questao = (QuestaoDTO) parent.getItemAtPosition(position);
+                            RespostaDTO resposta = (RespostaDTO) parent.getItemAtPosition(position);
 
-                            if(questao == null){
+                            if(resposta == null){
                                 return;
                             }
 
-                            Intent myIntent = new Intent(view.getContext(), QuestaoEditActivity.class);
-                            myIntent.putExtra("idQuestao", questao.getId());
-                            myIntent.putExtra("habilidade", questao.getHabilidade());
-                            myIntent.putExtra("questao", questao.getQuestao());
-                            myIntent.putExtra("idProva", questao.getIdProva());
+                            Intent myIntent = new Intent(view.getContext(), RespostaEditActivity.class);
+                            myIntent.putExtra("idQuestao", resposta.getIdQuestao());
+                            myIntent.putExtra("resposta", resposta.getResposta());
+                            myIntent.putExtra("idResposta", resposta.getId());
                             act.startActivity(myIntent);
 
 
@@ -99,10 +98,10 @@ public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
 
             JSONObject obj = new JSONObject(response);
 
-            Long idProva =  obj.getLong("idProva");;
+            Long idQuestao =  obj.getLong("idQuestao");;
 
-            Intent myIntent = new Intent(act, ListarQuestoesActivity.class);
-            myIntent.putExtra("idProva", idProva);
+            Intent myIntent = new Intent(act, ListarRespostasActivity.class);
+            myIntent.putExtra("idQuestao", idQuestao);
             act.startActivity(myIntent);
 
 
@@ -115,3 +114,5 @@ public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
         this.listView = listView;
     }
 }
+
+

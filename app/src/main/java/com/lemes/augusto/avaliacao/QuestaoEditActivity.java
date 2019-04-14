@@ -14,6 +14,7 @@ import com.lemes.augusto.avaliacao.entity.ProvaDTO;
 import com.lemes.augusto.avaliacao.entity.QuestaoDTO;
 import com.lemes.augusto.avaliacao.service.ProvaResponseService;
 import com.lemes.augusto.avaliacao.service.QuestaoRestPostService;
+import com.lemes.augusto.avaliacao.service.RespostaRestPostService;
 import com.lemes.augusto.avaliacao.view.SpinnerFactory;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class QuestaoEditActivity extends AppCompatActivity{
     String urlSalvar="http://192.168.0.10:8080/avaliacao/api/salvarQuestao";
     QuestaoDTO questaoDTO;
     Long idQuestao;
+    Long idProva;
     EditText habilidade;
     EditText questao;
     @Override
@@ -36,6 +38,7 @@ public class QuestaoEditActivity extends AppCompatActivity{
 
         //Recuperei a string da outra activity
         idQuestao = it.getLongExtra("idQuestao", 0L);
+        idProva = it.getLongExtra("idProva", 0L);
         String h = it.getStringExtra("habilidade");
         String q = it.getStringExtra("questao");
         habilidade = (EditText)findViewById(R.id.habilidade);
@@ -52,12 +55,27 @@ public class QuestaoEditActivity extends AppCompatActivity{
                 param.put("habilidade", habilidade.getText().toString());
                 param.put("questao", questao.getText().toString());
                 param.put("idQuestao", idQuestao == null?"":idQuestao.toString());
+                param.put("idProva", idProva == null?"":idProva.toString());
                 QuestaoRestPostService exec = new QuestaoRestPostService(param,urlSalvar, QuestaoEditActivity.this, AcaoEnum.SALVAR, questaoDTO);
                 exec.callvolly();
 
 
             }
         });
+
+        final Button buttonRespostas = findViewById(R.id.button_resposta);
+        buttonRespostas.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                if(idQuestao == null){
+                    return;
+                }
+
+                Intent myIntent = new Intent(QuestaoEditActivity.this, ListarRespostasActivity.class);
+                myIntent.putExtra("idQuestao", idQuestao);
+                startActivity(myIntent);
+            }
+        });
+
 
     }
 

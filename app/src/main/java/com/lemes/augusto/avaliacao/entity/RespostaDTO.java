@@ -7,6 +7,8 @@ public class RespostaDTO {
     private String resposta;
 
 
+    private Long idQuestao;
+
     public Long getId() {
         return id;
     }
@@ -48,4 +50,16 @@ public class RespostaDTO {
         this.resposta = resposta;
     }
 
+    public Long getIdQuestao() {
+        return idQuestao;
+    }
+
+    public void setIdQuestao(Long idQuestao) {
+        this.idQuestao = idQuestao;
+    }
+
+    @Override
+    public String toString() {
+        return getRespostaShort();
+    }
 }

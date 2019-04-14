@@ -23,6 +23,14 @@
 
         </activity>
 
+        <activity android:name=".ListarRespostasActivity">
+
+        </activity>
+        <activity android:name=".RespostaEditActivity">
+
+        </activity>
+
+
     </application>
 
 </manifest>

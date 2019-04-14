@@ -3,7 +3,9 @@ package com.lemes.augusto.avaliacao;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.lemes.augusto.avaliacao.entity.AcaoEnum;
@@ -17,7 +19,7 @@ import java.util.Map;
 public class ListarQuestoesActivity extends AppCompatActivity{
 
     String urlListar="http://192.168.0.10:8080/avaliacao/api/listarQuestoes";
-
+    Long idProva;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +30,19 @@ public class ListarQuestoesActivity extends AppCompatActivity{
         Intent it = getIntent();
 
         //Recuperei a string da outra activity
-        Long idProva = it.getLongExtra("idProva", 0L);
+        idProva = it.getLongExtra("idProva", 0L);
         listarQuestoes(idProva, listaQuestoes);
 
+        final Button botaoIncluir = findViewById(R.id.button_incluir_questao);
+        botaoIncluir.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(ListarQuestoesActivity.this, QuestaoEditActivity.class);
+                myIntent.putExtra("idProva", idProva);
 
+                startActivity(myIntent);
+
+            }
+        });
 
     }
 
