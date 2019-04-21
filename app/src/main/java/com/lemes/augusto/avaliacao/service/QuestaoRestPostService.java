@@ -42,6 +42,10 @@ public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
             salvar(response);
         }
 
+        if(acao.equals(AcaoEnum.EXCLUIR)){
+            excluir(response);
+        }
+
     }
 
     private void listarQuestoes(String response){
@@ -95,6 +99,23 @@ public class QuestaoRestPostService extends ExecuteRestPostService<QuestaoDTO> {
     }
 
     private void salvar(String response){
+        try {
+
+            JSONObject obj = new JSONObject(response);
+
+            Long idProva =  obj.getLong("idProva");;
+
+            Intent myIntent = new Intent(act, ListarQuestoesActivity.class);
+            myIntent.putExtra("idProva", idProva);
+            act.startActivity(myIntent);
+
+
+        } catch (Throwable tx) {
+            tx.printStackTrace();
+        }
+    }
+
+    private void excluir(String response){
         try {
 
             JSONObject obj = new JSONObject(response);

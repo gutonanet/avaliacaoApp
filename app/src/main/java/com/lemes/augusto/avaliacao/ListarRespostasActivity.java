@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lemes.augusto.avaliacao.entity.AcaoEnum;
 import com.lemes.augusto.avaliacao.entity.QuestaoDTO;
@@ -26,6 +27,9 @@ public class ListarRespostasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listar_respostas);
+
+        TextView titulo = findViewById(R.id.titulo);
+        titulo.setText(MainActivity.titulo);
 
         ListView listaRespostas = (ListView) findViewById(R.id.listaRespostas);
 

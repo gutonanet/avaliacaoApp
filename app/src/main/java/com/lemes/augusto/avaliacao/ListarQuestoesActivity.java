@@ -1,5 +1,6 @@
 package com.lemes.augusto.avaliacao;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lemes.augusto.avaliacao.entity.AcaoEnum;
 import com.lemes.augusto.avaliacao.entity.QuestaoDTO;
@@ -24,6 +26,9 @@ public class ListarQuestoesActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listar_questoes);
+
+        TextView titulo = findViewById(R.id.titulo);
+        titulo.setText(MainActivity.titulo);
 
         ListView listaQuestoes = (ListView) findViewById(R.id.listaQuestoes);
 

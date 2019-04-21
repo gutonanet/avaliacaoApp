@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.lemes.augusto.avaliacao.entity.AcaoEnum;
 import com.lemes.augusto.avaliacao.entity.MateriaDTO;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class QuestaoEditActivity extends AppCompatActivity{
 
     String urlSalvar="http://192.168.0.10:8080/avaliacao/api/salvarQuestao";
+    String urlExcluir="http://192.168.0.10:8080/avaliacao/api/excluirQuestao";
     QuestaoDTO questaoDTO;
     Long idQuestao;
     Long idProva;
@@ -34,6 +36,8 @@ public class QuestaoEditActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_questao);
 
+        TextView titulo = findViewById(R.id.titulo);
+        titulo.setText(MainActivity.titulo);
         Intent it = getIntent();
 
         //Recuperei a string da outra activity
@@ -52,11 +56,8 @@ public class QuestaoEditActivity extends AppCompatActivity{
                 habilidade = (EditText)findViewById(R.id.habilidade);
                 questao = (EditText)findViewById(R.id.questao);
                 Map<String,String> param = new LinkedHashMap<>();
-                param.put("habilidade", habilidade.getText().toString());
-                param.put("questao", questao.getText().toString());
                 param.put("idQuestao", idQuestao == null?"":idQuestao.toString());
-                param.put("idProva", idProva == null?"":idProva.toString());
-                QuestaoRestPostService exec = new QuestaoRestPostService(param,urlSalvar, QuestaoEditActivity.this, AcaoEnum.SALVAR, questaoDTO);
+                QuestaoRestPostService exec = new QuestaoRestPostService(param,urlExcluir, QuestaoEditActivity.this, AcaoEnum.EXCLUIR, questaoDTO);
                 exec.callvolly();
 
 
@@ -73,6 +74,18 @@ public class QuestaoEditActivity extends AppCompatActivity{
                 Intent myIntent = new Intent(QuestaoEditActivity.this, ListarRespostasActivity.class);
                 myIntent.putExtra("idQuestao", idQuestao);
                 startActivity(myIntent);
+            }
+        });
+
+        final Button buttonExcluir = findViewById(R.id.button_excluir);
+        buttonExcluir.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Map<String,String> param = new LinkedHashMap<>();
+                param.put("idQuestao", idQuestao == null?"":idQuestao.toString());
+                QuestaoRestPostService exec = new QuestaoRestPostService(param,urlExcluir, QuestaoEditActivity.this, AcaoEnum.EXCLUIR, questaoDTO);
+                exec.callvolly();
+
+
             }
         });
 

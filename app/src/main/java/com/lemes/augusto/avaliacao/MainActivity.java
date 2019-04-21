@@ -1,6 +1,7 @@
 package com.lemes.augusto.avaliacao;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> listaMateria;
     Button button;
 
+    public static String titulo = "";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +55,17 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button_id);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                EditText turma = (EditText)findViewById(R.id.turma);
+                EditText turmaE = (EditText)findViewById(R.id.turma);
                 EditText frase = (EditText)findViewById(R.id.frase);
                 Map<String,String> param = new LinkedHashMap<>();
-                param.put("turma", turma.getText().toString());
+                param.put("turma", turmaE.getText().toString());
                 param.put("tipoProva", spinner.getSelectedItem().toString());
                 param.put("frase", frase.getText().toString());
                 param.put("materia",spinnerMaterias.getSelectedItem().toString());
+
+                titulo = spinner.getSelectedItem().toString()+", "+spinnerMaterias.getSelectedItem().toString()+ ", "+ turmaE.getText().toString();
+
+
                 ProvaDTO prova = new ProvaDTO();
                 MateriaDTO material = new MateriaDTO();
                 prova.setMateria(material);

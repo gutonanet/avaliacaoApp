@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center"
+        android:text="Android Actionbar Title and SubTitle Example"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 
     <TextView android:id="@+id/text3"
         android:layout_width="wrap_content"
@@ -23,5 +33,11 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Salvar" />
+    <Button
+        android:id="@+id/button_excluir_resposta"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Excluir" />
+
 
 </LinearLayout>
