@@ -1,3 +1,5 @@
 https://dzone.com/articles/populate-spinner-from-json-data
 http://www.androiddeft.com/2018/01/15/multiple-spinner-dropdown-android/
 https://demonuts.com/android-populate-spinner-from-json-using-volley/
+
+https://imasters.com.br/cloud/spring-boot-na-nuvem-de-graca-e-com-as-melhores-praticas

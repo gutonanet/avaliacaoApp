@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class QuestaoEditActivity extends AppCompatActivity{
 
-    String urlSalvar="http://192.168.0.10:8080/avaliacao/api/salvarQuestao";
-    String urlExcluir="http://192.168.0.10:8080/avaliacao/api/excluirQuestao";
+    String urlSalvar="https://avaliacao1.herokuapp.com/api/salvarQuestao";
+    String urlExcluir="https://avaliacao1.herokuapp.com/api/excluirQuestao";
     QuestaoDTO questaoDTO;
     Long idQuestao;
     Long idProva;
@@ -57,7 +57,10 @@ public class QuestaoEditActivity extends AppCompatActivity{
                 questao = (EditText)findViewById(R.id.questao);
                 Map<String,String> param = new LinkedHashMap<>();
                 param.put("idQuestao", idQuestao == null?"":idQuestao.toString());
-                QuestaoRestPostService exec = new QuestaoRestPostService(param,urlExcluir, QuestaoEditActivity.this, AcaoEnum.EXCLUIR, questaoDTO);
+                param.put("questao", questao.getText().toString());
+                param.put("habilidade", habilidade.getText().toString());
+                param.put("idProva", idProva.toString());
+                QuestaoRestPostService exec = new QuestaoRestPostService(param,urlSalvar, QuestaoEditActivity.this, AcaoEnum.SALVAR, questaoDTO);
                 exec.callvolly();
 
 

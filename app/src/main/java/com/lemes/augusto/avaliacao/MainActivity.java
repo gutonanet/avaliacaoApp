@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     Spinner spinner;
     Spinner spinnerMaterias;
-    String urlTipoProva="http://192.168.0.10:8080/avaliacao/api/tiposProva";
-    String urlMaterias="http://192.168.0.10:8080/avaliacao/api/materias";
-    String urlSalvar="http://192.168.0.10:8080/avaliacao/api/findProva";
+    String urlTipoProva="https://avaliacao1.herokuapp.com/api/tiposProva";
+    String urlMaterias="https://avaliacao1.herokuapp.com/api/materias";
+    String urlSalvar="https://avaliacao1.herokuapp.com/api/findProva";
     ArrayList<String> listaTipoProva;
     ArrayList<String> listaMateria;
     Button button;

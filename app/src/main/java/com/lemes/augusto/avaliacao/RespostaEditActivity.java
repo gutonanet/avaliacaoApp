@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class RespostaEditActivity extends AppCompatActivity{
 
-    String urlSalvar="http://192.168.0.10:8080/avaliacao/api/salvarResposta";
-    String urlExcluir="http://192.168.0.10:8080/avaliacao/api/excluirResposta";
+    String urlSalvar="https://avaliacao1.herokuapp.com/api/salvarResposta";
+    String urlExcluir="https://avaliacao1.herokuapp.com/api/excluirResposta";
     RespostaDTO respostaDTO;
     Long idQuestao;
     Long idResposta;

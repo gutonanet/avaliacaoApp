@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class ListarRespostasActivity extends AppCompatActivity {
 
-    String urlListar="http://192.168.0.10:8080/avaliacao/api/listarRespostas";
+    String urlListar="https://avaliacao1.herokuapp.com/api/listarRespostas";
 
     Long idQuestao;
     @Override
